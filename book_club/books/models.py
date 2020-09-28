@@ -49,8 +49,8 @@ class Author(models.Model):
     """Авторы и переводчики"""
     name = models.CharField("Имя", max_length=100)
     age = models.PositiveSmallIntegerField("Возраст", default=0)
-    description = models.TextField("Описание")
-    image = models.ImageField("Аватарка", upload_to="authors/")
+    description = models.TextField("Об авторе")
+    image = models.ImageField("Аватарка", upload_to="authors/", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -88,7 +88,6 @@ class Book(models.Model):
                            choices=[('0+', '0+'), ('6+', '6+'), ('12+', '12+'),
                                     ('14+', '14+'), ('16+', '16+'), ('18+', '18+')],
                            default='0+')
-    cost = models.PositiveIntegerField("Стоимость книги")
     url = models.SlugField(max_length=120, unique=True)
     draft = models.BooleanField("Черновик", default=False)
 
