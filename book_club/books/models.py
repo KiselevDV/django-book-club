@@ -5,16 +5,16 @@ from django.db import models
 
 class Category(models.Model):
     """Категории"""
-    name = models.CharField("Тема", max_length=30)
-    description = models.CharField("Описание", max_length=300)
+    name = models.CharField("Категория", max_length=30)
+    description = models.CharField("Описание категории", max_length=300)
     url = models.SlugField(max_length=120, unique=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Тема"
-        verbose_name_plural = "Темы"
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
 
 
 class Genre(models.Model):
@@ -32,9 +32,8 @@ class Genre(models.Model):
 
 
 class Topic(models.Model):
-    """Темы/подборки"""
-    name = models.CharField("Название", max_length=150)
-    description = models.TextField("Описание", blank=True, null=True)
+    """Темы"""
+    name = models.CharField("Подборка", max_length=150)
     url = models.SlugField(max_length=150, unique=True)
 
     def __str__(self):
@@ -48,9 +47,9 @@ class Topic(models.Model):
 class Author(models.Model):
     """Авторы и переводчики"""
     name = models.CharField("Имя", max_length=100)
-    age = models.PositiveSmallIntegerField("Возраст", default=0)
-    description = models.TextField("Об авторе")
-    image = models.ImageField("Аватарка", upload_to="authors/", blank=True, null=True)
+    date_of_birth = models.DateField("Дата рождения", blank=True)
+    description = models.TextField("Об авторе", blank=True)
+    image = models.ImageField("Аватарка", upload_to="authors/", blank=True)
 
     def __str__(self):
         return self.name
@@ -60,28 +59,44 @@ class Author(models.Model):
         verbose_name_plural = "Авторы и переводчики"
 
 
+class Publisher(models.Model):
+    """Издатель"""
+    name = models.CharField("Имя", max_length=100)
+    description = models.TextField("Об издателе", blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Издатель"
+        verbose_name_plural = "Издатели"
+
+
 class Book(models.Model):
     """Книга"""
     title = models.CharField("Название", max_length=80)
     tagline = models.CharField("Слоган", max_length=80, blank=True, null=True)
-    description = models.TextField("Описание")
+    description = models.TextField("О книге")
     cover = models.ImageField("Обложка", upload_to="books/")
-    year_of_writing = models.PositiveSmallIntegerField("Год написания", default=2020)
+    year_of_writing = models.PositiveSmallIntegerField("Год написания", default=2020, blank=True)
     year_of_publishing = models.PositiveSmallIntegerField("Год издания", default=2020)
-    date_receipt = models.PositiveSmallIntegerField("Дата поступления", default=date.today)
+    date_receipt = models.DateField("Дата поступления", default=date.today)
     isbn = models.IntegerField(
-        "Номер книги", help_text="Международный стандартный номер книги", unique=True)
-    signs = models.PositiveIntegerField("Количество знаков", blank=True, null=True)
+        "Номер книги", null=True, blank=True,
+        help_text="Международный стандартный номер книги ISBN (EAN)")
+    signs = models.FloatField(
+        "Знаков", blank=True, null=True, help_text="Количество знаков (тысяч)")
     pages = models.PositiveSmallIntegerField("Количество страниц")
-    writers = models.ManyToManyField(
+    writer = models.ManyToManyField(
         Author, verbose_name="Писатель", related_name="book_writer")
-    translators = models.ManyToManyField(
+    translator = models.ManyToManyField(
         Author, verbose_name="Переводчик", related_name="book_translator", blank=True)
-    illustrators = models.ManyToManyField(
+    illustrator = models.ManyToManyField(
         Author, verbose_name="Иллюстратор", related_name="book_illustrator", blank=True)
-    publisher = models.CharField("Издательство", max_length=80)
+    publisher = models.ManyToManyField(
+        Publisher, verbose_name="Издательство", related_name="book_publisher")
     genres = models.ManyToManyField(Genre, verbose_name="Жанры")
-    topics = models.ManyToManyField(Topic, verbose_name="Темы")
+    topics = models.ManyToManyField(Topic, verbose_name="Темы", blank=True)
     category = models.ForeignKey(
         Category, verbose_name="Категория", on_delete=models.SET_NULL, null=True)
     age = models.CharField("Возрастной ценз", max_length=3,
@@ -103,6 +118,7 @@ class BookExcerpt(models.Model):
     """Отрывок из книги"""
     title = models.CharField("Заголовок", max_length=100)
     text = models.TextField("Текст")
+    book = models.ForeignKey(Book, verbose_name="Книга", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
