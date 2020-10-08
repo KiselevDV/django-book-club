@@ -20,7 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('books.urls')),
+    path('', include('books.urls')),  # подключаем url из books
 ]
 
 # Отобразить медиа в админке (дебаг режиме)

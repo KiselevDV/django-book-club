@@ -6,7 +6,7 @@ from django.db import models
 class Category(models.Model):
     """Категории"""
     name = models.CharField("Категория", max_length=30)
-    description = models.CharField("Описание категории", max_length=300)
+    description = models.CharField("Описание категории", max_length=30, blank=True)
     url = models.SlugField(max_length=120, unique=True)
 
     def __str__(self):
@@ -19,8 +19,8 @@ class Category(models.Model):
 
 class Genre(models.Model):
     """Жанры"""
-    name = models.CharField("Название", max_length=50)
-    description = models.TextField("Описание")
+    name = models.CharField("Жанр", max_length=50)
+    description = models.TextField("Описание жанра")
     url = models.SlugField(max_length=120, unique=True)
 
     def __str__(self):
@@ -75,7 +75,7 @@ class Publisher(models.Model):
 class Book(models.Model):
     """Книга"""
     title = models.CharField("Название", max_length=80)
-    tagline = models.CharField("Слоган", max_length=80, blank=True, null=True)
+    tagline = models.CharField("Слоган", max_length=300, blank=True, null=True)
     description = models.TextField("О книге")
     cover = models.ImageField("Обложка", upload_to="books/")
     year_of_writing = models.PositiveSmallIntegerField("Год написания", default=2020, blank=True)

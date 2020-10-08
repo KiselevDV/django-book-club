@@ -9,7 +9,7 @@ class BooksView(View):
 
     def get(self, request):
         books = Book.objects.all()
-        return render(request, "books/book_list.html", {'book_list': books})
+        return render(request, "books/books.html", {'books': books})
 
 # Логика приложения (принимает запросы и возращает ответы)
 # Create your views here.
