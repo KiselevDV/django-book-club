@@ -1,0 +1,67 @@
+{% load static %}
+<header>
+	<div class="top-banner">
+		<a href="#">Книга лучший подарок, купите сертификат для ваших родных и близких!</a>
+	</div>
+	<div class="container rounded">
+		<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+			<a class="navbar-brand" href="/">
+				<img src="{% static 'image/title.png' %}" alt="title-logo" width="120">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+							data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+							aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<form class="form-inline ml-5 my-md-2">
+					<input class="form-control" type="search" placeholder="Книга или автор">
+					<button class="btn btn-outline-secondary ml-2" type="submit">Найти</button>
+				</form>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item mr-4">
+						<a class="nav-link" href="#">Теги</a>
+					</li>
+					<li class="nav-item mr-4">
+						<a class="nav-link" href="#">Жанры</a>
+					</li>
+					<li class="nav-item mr-4 dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown_my_books"
+							 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Мои книги</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown_my_books">
+							<a class="dropdown-item" href="#">Все</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Прочитанные</a>
+							<a class="dropdown-item" href="#">В процессе</a>
+							<a class="dropdown-item" href="#">Отложенные</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Корзина</a>
+						</div>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Войти</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="header-bottom">
+			<div class="row">
+				<div class="col bg-transparent">
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Что почитать?
+					</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Новинки</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Популярное</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Аудиокниги</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Топ аудиокниг
+					</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Бесплатные</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">-50%</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Случайная
+						книга
+					</button>
+					<button type="button" class="btb btn btn-outline-light bg-secondary">Новости</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

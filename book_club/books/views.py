@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from .models import Book, Author
@@ -8,7 +9,7 @@ class BooksView(View):
     """Список книг"""
 
     def get(self, request):
-        books = Book.objects.all()
+        books = Book.objects.filter(draft=False)
         authors = Author.objects.all()
         return render(request, "books/books.html", {'books': books, 'authors': authors})
 
