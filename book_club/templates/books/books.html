@@ -104,14 +104,14 @@
 							<img src="{{ book.cover.url }}" class="img-fluid" alt="">
 						</div>
 						<div>
-							<a href="/{{ book.url }}">
+							<a href="{{ book.get_absolute_url }}">
 								<small class="main_title">{{ book.title }}</small>
 							</a>
 							<div>
 								<div>
-									{% for writer in book.writer.all %}
+									{% for author in authors %}
 									<a href="#">
-										<small class="main_writer">{{ writer.name }}</small>
+										<small class="main_writer">{{ author.name }}</small>
 									</a>
 									{% endfor %}
 								</div>

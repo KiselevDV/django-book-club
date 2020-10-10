@@ -126,8 +126,8 @@
 						<br>
 						<li>
 							<span>Писатель:
-								{% for writer in book.writer.all %}
-								{{ writer.name }}
+								{% for author in authors %}
+								{{ author.name }}
 								{% endfor %}
 							</span>
 						</li>
@@ -208,10 +208,9 @@
 						</span>
 					<h5 class="pl-lg-5 mt-3 mb-2"><b>Тэги</b></h5>
 					<span>
-						{% for topic in book.topics.all %}
+						{% for tag in book.tags.all %}
 							<a class="navbar-text" href="#">
-								<input type="button" value="{{ topic.name }}"
-											 class="btb btn-sm btn-outline-primary">
+								<input type="button" value="{{ tag.name }}" class="btb btn-sm btn-outline-primary">
 							</a>
 						{% endfor %}
 						</span>

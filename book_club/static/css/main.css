@@ -22,11 +22,6 @@ ul {
   list-style-type: none;
 }
 
-.font_style {
-  font-size: 21px;
-  font-family: Times New Roman, serif;
-}
-
 header {
   background-color: #ebebeb;
 }
@@ -48,19 +43,19 @@ header {
 
 main {
   font-family: Verdana, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 140%;
   background-color: #f2f2f2;
 }
 
 .main_title {
   color: #22252b;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .main_writer {
   color: #01194a;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 footer {
@@ -71,4 +66,9 @@ footer {
   height: 35px;
   margin-top: 30px;
   margin-bottom: 50px;
+}
+
+.font_style {
+  font-size: 21px;
+  font-family: Times New Roman, serif;
 }

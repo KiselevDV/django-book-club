@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 
-from .models import Book
+from .models import Book, Author
 
 
 class BooksView(View):
@@ -9,7 +9,8 @@ class BooksView(View):
 
     def get(self, request):
         books = Book.objects.all()
-        return render(request, "books/books.html", {'books': books})
+        authors = Author.objects.all()
+        return render(request, "books/books.html", {'books': books, 'authors': authors})
 
 
 class BookDetailView(View):
@@ -17,7 +18,8 @@ class BookDetailView(View):
 
     def get(self, request, slug):
         book = Book.objects.get(url=slug)  # url - название поля SlugField в models.py
-        return render(request, "books/book_detail.html", {'book': book})
+        authors = Author.objects.all()
+        return render(request, "books/book_detail.html", {'book': book, 'authors': authors})
 
 # Логика приложения (принимает запросы и возращает ответы)
 # Create your views here.

@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -118,6 +119,10 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    # получение ссылки (имя url = 'book_detail' и параметры slug из urls)
+    def get_absolute_url(self):
+        return reverse("book_detail", kwargs={"slug": self.url})
 
     class Meta:
         verbose_name = "Книга"
