@@ -4,6 +4,7 @@ body {
 }
 
 a:link {
+  text-decoration: none;
   color: #010714;
 }
 
@@ -13,7 +14,17 @@ a:active {
 }
 
 a:visited {
+  text-decoration: none;
   color: #000000;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.font_style {
+  font-size: 21px;
+  font-family: Times New Roman, serif;
 }
 
 header {
@@ -30,9 +41,26 @@ header {
 
 .header-bottom {
   text-align: center;
-  height: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  height: 75px;
+  margin-top: 40px;
+  margin-bottom: 0px;
+}
+
+main {
+  font-family: Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 140%;
+  background-color: #f2f2f2;
+}
+
+.main_title {
+  color: #22252b;
+  font-size: 15px;
+}
+
+.main_writer {
+  color: #01194a;
+  font-size: 16px;
 }
 
 footer {
