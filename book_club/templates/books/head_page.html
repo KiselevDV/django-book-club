@@ -1,6 +1,6 @@
 {% extends 'books/base.html' %}
 {% block content %}
-{% for book in books %}
+{% for book in book_list %}
 <main>
 	<div class="container">
 		<div class="left-ads-display col-lg-12 pt-3">
@@ -18,11 +18,9 @@
 							</a>
 							<div>
 								<div>
-									{% for author in authors %}
 									<a href="#">
-										<small class="main_writer">{{ author.name }}</small>
+										<small class="main_writer">{{ book.writer }}</small>
 									</a>
-									{% endfor %}
 								</div>
 							</div>
 							<!--							<ul class="stars">-->
@@ -40,4 +38,4 @@
 		</div>
 	</div>
 </main>
-{% endblock %}
+{% endblock content %}

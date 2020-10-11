@@ -122,7 +122,7 @@ class Book(models.Model):
 
     # получение ссылки (имя url = 'book_detail' и параметры slug из urls)
     def get_absolute_url(self):
-        return reverse("book_detail", kwargs={"slug": self.url})
+        return reverse("about_book", kwargs={"slug": self.url})
 
     class Meta:
         verbose_name = "Книга"

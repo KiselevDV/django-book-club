@@ -5,22 +5,25 @@ from django.views.generic.base import View
 from .models import Book, Author
 
 
-class BooksView(View):
+class BooksView(ListView):
     """Список книг"""
-
-    def get(self, request):
-        books = Book.objects.filter(draft=False)
-        authors = Author.objects.all()
-        return render(request, "books/books.html", {'books': books, 'authors': authors})
+    model = Book
+    queryset = Book.objects.filter(draft=False)
+    template_name = "books/head_page.html"
 
 
-class BookDetailView(View):
+class AboutBookView(DetailView):
     """Описание книги"""
+    model = Book
+    slug_field = 'url'  # url - название поля SlugField в models.py
+    template_name = "books/about_book.html"
 
-    def get(self, request, slug):
-        book = Book.objects.get(url=slug)  # url - название поля SlugField в models.py
-        authors = Author.objects.all()
-        return render(request, "books/book_detail.html", {'book': book, 'authors': authors})
+
+class BookExcerptView(DetailView):
+    """Отрывок из книги"""
+    model = Book
+    slug_field = 'url'
+    template_name = "books/book_read_excerpt.html"
 
 # Логика приложения (принимает запросы и возращает ответы)
 # Create your views here.

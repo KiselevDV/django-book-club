@@ -1,0 +1,18 @@
+{% extends 'books/base.html' %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+<main>
+	<div class="container">
+		<div class="left-ads-display col-lg-12 pt-3">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="main_title_text mt-5 mb-4">{{ book.title }}</h2>
+					{% for bookexcerpt in book.bookexcerpt_set.all %}
+					<p>{{ bookexcerpt.text }}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock content %}
