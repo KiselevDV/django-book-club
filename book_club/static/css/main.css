@@ -48,10 +48,6 @@ main {
   background-color: #f2f2f2;
 }
 
-.main_title_text {
-  text-align: center;
-}
-
 .main_title {
   color: #22252b;
   font-size: 13px;
@@ -66,7 +62,6 @@ main {
   font-size: 21px;
   font-family: Times New Roman, serif;
 }
-
 
 footer {
   background-color: #ebebeb;

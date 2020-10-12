@@ -1,16 +1,18 @@
 {% extends 'books/base.html' %}
-{% block title %}{{ book.title }}{% endblock %}
+{% block title %}{{ book.title }}{% endblock title %}
 {% block content %}
 <main>
 	<div class="container">
-		<div class="left-ads-display col-lg-12 pt-3">
+		<div class="col-lg-12 pt-3">
 			<div class="row">
 				<div class="col-md-5">
 					<img src="{{ book.cover.url }}" class="img-fluid" alt="cover">
 				</div>
 				<div class="col-md-7 pl-lg-5">
-					<h2 class="main_title_text">{{ book.title }}</h2>
-					<h6 class="pl-lg-4 mt-5"><b>Подробная информация</b></h6>
+					<h2 class="text-center">{{ book.title }}</h2>
+					<h6 class="pl-lg-4 mt-5">
+						<b>Подробная информация</b>
+					</h6>
 					<ul>
 						<li>
 							<span>Год написания:  {{ book.year_of_writing }}</span>
@@ -33,15 +35,11 @@
 						</li>
 						<br>
 						<li>
-							<span>Писатель:
-								{{ book.writer }}
-							</span>
+							<span>Писатель:  {{ book.writer }}</span>
 						</li>
 						{% for translator in book.translator.all %}
 						<li>
-							<span>Переводчик:
-								{{ translator.name }}
-							</span>
+							<span>Переводчик:  {{ translator.name }}</span>
 						</li>
 						{% endfor %}
 						<li>
@@ -66,10 +64,10 @@
 						</li>
 					</ul>
 					<a href="{{ book.get_absolute_url }}read-excerpt/">
-						<h6 class="pl-lg-4 mt-3"><b>Читать отрывок</b></h6>
+						<h6 class="pl-lg-4 mt-5"><b>Читать отрывок</b></h6>
 					</a>
 					<a href="#">
-						<h6 class="pl-lg-4 mt-3"><b>Слушать фрагмент</b></h6>
+						<h6 class="pl-lg-4 mt-5"><b>Слушать фрагмент</b></h6>
 					</a>
 					<!--					<ul>-->
 					<!--						<div class="share-desc">-->
@@ -101,10 +99,12 @@
 				</div>
 			</div>
 			<hr>
-			<div class="row sub-para-w3layouts mt-5">
-				<div class="container">
-					<h5 class="pl-lg-5"><b>Жанры</b></h5>
-					<span>
+			<div class="container mt-5">
+				<div class="row mt-5">
+					<div class="col-2"></div>
+					<div class="col-8">
+						<h5 class="pl-lg-5"><b>Жанры</b></h5>
+						<span>
 						{% for genre in book.genres.all %}
 							<a class="navbar-text" href="#">
 								<input type="button" value="{{ genre.name }}"
@@ -112,98 +112,73 @@
 							</a>
 						{% endfor %}
 						</span>
-					<h5 class="pl-lg-5 mt-3 mb-2"><b>Тэги</b></h5>
-					<span>
+						<h5 class="pl-lg-5 mt-5"><b>Тэги</b></h5>
+						<span>
 						{% for tag in book.tags.all %}
 							<a class="navbar-text" href="#">
-								<input type="button" value="{{ tag.name }}" class="btb btn-sm btn-outline-primary">
+								<input type="button" value="{{ tag.name }}"
+											 class="btb btn-sm btn-outline-primary">
 							</a>
 						{% endfor %}
 						</span>
-				</div>
-				<h3 class="pl-lg-4 mt-5"><b>О книге</b></h3>
-				<p class="main_font_style">{{ book.description }}</p>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="single-form-left">
-					<!-- contact form grid -->
-					<div class="contact-single">
-						<h3 class="editContent" style="outline: none; cursor: inherit;">
-					<span class="sub-tittle editContent" style="outline: none; cursor: inherit;">
-						02
-					</span>
-							Оставить отзыв
-						</h3>
-						<form action="#" method="get" class="mt-4">
-							<div class="form-group editContent"
-									 style="outline: none; cursor: inherit;">
-								<label for="contactcomment" class="editContent"
-											 style="outline: none; cursor: inherit;">Ваш
-									комментарий
-									*</label>
-								<textarea class="form-control border" rows="5"
-													id="contactcomment" required=""></textarea>
+						<h3 class="pl-lg-4 mt-5"><b>О книге</b></h3>
+						<p class="main_font_style mt-2">{{ book.description }}</p>
+						<hr>
+						{% for review in book.review_set.all %}
+						<div class="media py-5">
+							<img src="#" class="img-fluid mr-3" alt="image">
+							<div class="media-body mt-4">
+								<h5 class="mt-0">{{ review.name }}</h5>
+								<p class="mt-2">{{ review.text }}</p>
+								<!--						<div class="media mt-5 editContent"-->
+								<!--								 style="outline: none; cursor: inherit;">-->
+								<!--							<a class="pr-3" href="#">-->
+								<!--								<img src="bundles/images/te1.jpg" class="img-fluid "-->
+								<!--										 alt="image" style="outline: none; cursor: inherit;">-->
+								<!--							</a>-->
+								<!--							<div class="media-body">-->
+								<!--								<h5 class="mt-0 editContent"-->
+								<!--										style="outline: none; cursor: inherit;">Leia Organa</h5>-->
+								<!--								<p class="mt-2 editContent"-->
+								<!--									 style="outline: none; cursor: inherit;"> Cras sit amet-->
+								<!--									nibh libero, in gravida nulla. Nulla vel metus-->
+								<!--									scelerisque ante sollicitudin. Cras purus odio,-->
+								<!--									vestibulum in vulputate at, tempus viverra turpis. Fusce-->
+								<!--									condimentum nunc ac nisi vulputate fringilla..</p>-->
+								<!--							</div>-->
+							</div>
+						</div>
+						{% endfor %}
+						<h5 class="pl-lg-5 mt-5">
+							<small class="text-muted">02</small>
+							<b>Оставить отзыв</b>
+						</h5>
+						<form action="{% url 'add_review' book.id %}" method="post" class="mt-4">
+							{% csrf_token %}
+							<div class="form-group">
+								<!--							<label for="contactcomment">Ваш комментарий *</label>-->
+								<textarea class="form-control border" rows="5" name="text" id="contactcomment"
+													required="" placeholder="Ваш комментарий"></textarea>
 							</div>
 							<div class="d-sm-flex">
-								<div class="col-sm-6 form-group p-0 editContent"
-										 style="outline: none; cursor: inherit;">
-									<label for="contactusername" class="editContent"
-												 style="outline: none; cursor: inherit;">Имя
-										*</label>
-									<input type="text" class="form-control border"
-												 id="contactusername" required="">
+								<div class="col-sm-6 form-group ml-sm-0">
+									<!--								<label for="contactusername">Имя *</label>-->
+									<input type="text" class="form-control border" name="name" id="contactusername"
+												 required="" placeholder="Имя">
 								</div>
-								<div class="col-sm-6 form-group ml-sm-3 editContent"
-										 style="outline: none; cursor: inherit;">
-									<label for="contactemail" class="editContent"
-												 style="outline: none; cursor: inherit;">Email
-										*</label>
-									<input type="email" class="form-control border"
-												 id="contactemail" required="">
+								<div class="col-sm-6 form-group ml-sm-0">
+									<!--								<label for="contactemail">Email *</label>-->
+									<input type="email" class="form-control border" name="email" id="contactemail"
+												 required="" placeholder="Email">
 								</div>
 							</div>
 							<button type="submit"
-											class="mt-3 btn btn-success btn-block py-3"
-											style="outline: none; cursor: inherit;">Отправить
+											class="btn btn-block btn-lg btn-outline-success mt-4 mb-5 py-2">
+								Опубликовать
 							</button>
 						</form>
 					</div>
-					<!--  //contact form grid ends here -->
-				</div>
-				<div class="media py-5">
-					<img src="bundles/images/te2.jpg" class="mr-3 img-fluid" alt="image"
-							 style="outline: none; cursor: inherit;">
-					<div class="media-body mt-4">
-						<h5 class="mt-0 editContent"
-								style="outline: none; cursor: inherit;">Daniel Doe</h5>
-						<p class="mt-2 editContent" style="outline: none; cursor: inherit;">
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-							scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-							vulputate at, tempus viverra turpis.
-						</p>
-						<div class="media mt-5 editContent"
-								 style="outline: none; cursor: inherit;">
-							<a class="pr-3" href="#">
-								<img src="bundles/images/te1.jpg" class="img-fluid "
-										 alt="image" style="outline: none; cursor: inherit;">
-							</a>
-							<div class="media-body">
-								<h5 class="mt-0 editContent"
-										style="outline: none; cursor: inherit;">Leia Organa</h5>
-								<p class="mt-2 editContent"
-									 style="outline: none; cursor: inherit;"> Cras sit amet
-									nibh libero, in gravida nulla. Nulla vel metus
-									scelerisque ante sollicitudin. Cras purus odio,
-									vestibulum in vulputate at, tempus viverra turpis. Fusce
-									condimentum nunc ac nisi vulputate fringilla..</p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	</div>
 </main>
 {% endblock content %}
