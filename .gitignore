@@ -1,5 +1,5 @@
 .env/
 .idea
-db.sqlite3
+
 __pycache__/
-book_club/media/
+*/__pycache__/
